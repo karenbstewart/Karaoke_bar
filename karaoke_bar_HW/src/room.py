@@ -25,14 +25,24 @@ class Room:
         if is_in_list == False:
             self.guest_list
 
-    def can_guest_enter_this_room(self, customer):
+    def can_guest_enter_this_room(self):
         if len(self.guest_list) < self.capacity:
-            self.guest_list.append(customer)
+            return True
         else: 
-            self.wait_queue_list.append(customer)
+            return False
+
+    def can_guest_afford_to_enter_room(self, customer):
+        if customer.wallet >= self.entry_fee:
+            return True
+        else:
+            return False
 
     def check_in(self, customer):
-        self.can_guest_enter_this_room(customer)
+        if self.can_guest_enter_this_room() == True and self.can_guest_afford_to_enter_room(customer) == True:
+            self.guest_list.append(customer)
+            customer.wallet -= self.entry_fee
+        else:
+            self.wait_queue_list.append(customer)
 
 
 

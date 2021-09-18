@@ -7,7 +7,7 @@ import pdb
 class TestRoom(unittest.TestCase):
     def setUp(self):
         self.room1 = Room("Disco room", 13, 15)
-        self.room2 = Room("RnB room", 10, 17)
+        self.room2 = Room("RnB room", 10, 20)
         self.room3 = Room("ickle room", 4, 25)
         self.song1 = Song("closing time", "Semisonic")
         self.song2 = Song("All the small things", "Blink 182")
@@ -55,7 +55,12 @@ class TestRoom(unittest.TestCase):
         self.assertEqual(3, len(self.room3.wait_queue_list))
         self.assertEqual(4, len(self.room3.guest_list))
 
-        
+    def test_guest_in_room_paid(self):
+        self.room2.check_in(self.guest1)
+        self.room2.check_in(self.guest3)
+        self.assertEqual(80, self.guest1.wallet)
+        self.assertEqual(12, self.guest3.wallet)
+
 
 
 
