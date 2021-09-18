@@ -2,6 +2,7 @@ import unittest
 from src.room import Room 
 from src.song import Song
 from src.guest import Guest
+import pdb
 
 class TestRoom(unittest.TestCase):
     def setUp(self):
@@ -17,6 +18,7 @@ class TestRoom(unittest.TestCase):
         self.guest4 = Guest("Thomas", 300, "Die a happy man")
         self.guest5 = Guest("Mark", 3, "If")
         self.guest6 = Guest("Samuel", 1000, "Call it dreaming")
+        self.guest7 = Guest("Ray", 80, "Days")
 
     def test_room_has_fee(self):
         self.assertEqual(15, self.room1.entry_fee)
@@ -42,14 +44,18 @@ class TestRoom(unittest.TestCase):
         is_guest_checked_out = self.room2.check_find_guest_by_name(self.guest2.name)
         self.assertEqual(False, is_guest_checked_out)
 
-    # def test_too_many_guest_in_room(self):
-    #     self.room3.check_in(self.guest1)
-    #     self.room3.check_in(self.guest2)
-    #     self.room3.check_in(self.guest3)
-    #     self.room3.check_in(self.guest4)
-    #     self.room3.check_in(self.guest5)
-    #     self.room3.can_guest_enter_this_room(self.guest6, self.room3.wait_queue)
-    #     self.assertEqual(2, len(self.room3.wait_queue))
+    def test_too_many_guest_in_room(self):
+        self.room3.check_in(self.guest1)
+        self.room3.check_in(self.guest2)
+        self.room3.check_in(self.guest3)
+        self.room3.check_in(self.guest4)
+        self.room3.check_in(self.guest5)
+        self.room3.check_in(self.guest6)
+        self.room3.check_in(self.guest7)
+        self.assertEqual(3, len(self.room3.wait_queue_list))
+        self.assertEqual(4, len(self.room3.guest_list))
+
+        
 
 
 
