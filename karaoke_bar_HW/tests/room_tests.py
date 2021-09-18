@@ -61,7 +61,13 @@ class TestRoom(unittest.TestCase):
         self.assertEqual(80, self.guest1.wallet)
         self.assertEqual(12, self.guest3.wallet)
 
-
-
+    def test_plays_guests_favourite_song(self):
+        self.room3.add_song_to_room(self.song3)
+        self.room3.add_song_to_room(self.song1)
+        self.room3.add_song_to_room(self.song2)
+        self.room3.check_in(self.guest1)
+        self.room3.is_fav_song_in_this_room(self.guest1)
+        self.assertEqual("woop", self.guest1.talk)
+        
 
 

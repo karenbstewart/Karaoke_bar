@@ -37,10 +37,17 @@ class Room:
         else:
             return False
 
+    def is_fav_song_in_this_room(self, customer):
+        for song in self.song_list:
+            if customer.fav_song == song.title:
+                customer.talk = "woop"
+                
+
     def check_in(self, customer):
         if self.can_guest_enter_this_room() == True and self.can_guest_afford_to_enter_room(customer) == True:
             self.guest_list.append(customer)
             customer.wallet -= self.entry_fee
+            self.is_fav_song_in_this_room(customer)
         else:
             self.wait_queue_list.append(customer)
 

@@ -3,4 +3,5 @@ class Guest:
         self.name = input_name
         self.wallet = input_wallet
         self.fav_song = favourite_song
+        self.talk = ""
 
