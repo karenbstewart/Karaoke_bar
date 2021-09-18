@@ -41,16 +41,25 @@ class Room:
         for song in self.song_list:
             if customer.fav_song == song.title:
                 customer.talk = "woop"
-                
+
+    def guest_pays_entry_fee(self, customer):
+        customer.wallet -= self.entry_fee
+
+    def add_guest_to_guest_list(self, customer):
+        self.guest_list.append(customer)
+
 
     def check_in(self, customer):
         if self.can_guest_enter_this_room() == True and self.can_guest_afford_to_enter_room(customer) == True:
-            self.guest_list.append(customer)
-            customer.wallet -= self.entry_fee
+            self.add_guest_to_guest_list(customer)
+            self.guest_pays_entry_fee(customer)
             self.is_fav_song_in_this_room(customer)
         else:
             self.wait_queue_list.append(customer)
 
+    def room_fee_total(self, room_list, amount):
+        number_of_guests = len(room_list)
+        return number_of_guests * amount
 
 
 

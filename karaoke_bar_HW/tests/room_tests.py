@@ -69,5 +69,13 @@ class TestRoom(unittest.TestCase):
         self.room3.is_fav_song_in_this_room(self.guest1)
         self.assertEqual("woop", self.guest1.talk)
         
+    def test_total_of_fees_paid_for_room(self):
+        self.room1.check_in(self.guest1)
+        self.room1.check_in(self.guest2)
+        self.room1.check_in(self.guest3)
+        self.room1.check_in(self.guest4)
+        self.room1.check_in(self.guest5)
+        self.assertEqual(45, self.room1.room_fee_total(self.room1.guest_list, self.room1.entry_fee))
+
 
 
